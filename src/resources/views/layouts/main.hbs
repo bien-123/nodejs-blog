@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div class="app">
+            {{!-- {{> header}}: gọi đến file header.hbs trong thư mục partials --}}
+            {{> header}}
+
+            <div class="container">
+                {{{body}}}
+            </div>
+
+            {{!-- {{> footer}}: gọi đến file footer.hbs trong thư mục partials --}}
+            {{> footer}}
+        </div>
+    </body>
+</html>
