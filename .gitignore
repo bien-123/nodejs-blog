@@ -1,3 +1,5 @@
 .vscode
 
+# Không commit các file lên github
+src/public/css
 node_modules/
