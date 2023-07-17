@@ -19,12 +19,12 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 
 // Router
-app.get('/', (req, res) => {
-    res.render('home');
+app.get('/', (req, res) => { //req: request, res: response
+    res.render('home'); // link đến file home.hbs
 })
 
 app.get('/news', (req, res) => {
-    res.render('news');
+    res.render('news'); // link đến file news.hbs
 })
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
