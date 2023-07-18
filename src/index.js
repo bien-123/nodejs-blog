@@ -8,8 +8,8 @@ const port = 3000;
 // static files
 app.use(express.static(path.join(__dirname,'public')));
 
-// HTTP logger
-app.use(morgan('combined'));
+// HTTP logger: hiển thị log cho dễ xét lỗi
+// app.use(morgan('combined'));
 
 // Template engine
 app.engine('hbs', handlebars({
@@ -25,6 +25,11 @@ app.get('/', (req, res) => { //req: request, res: response
 
 app.get('/news', (req, res) => {
     res.render('news'); // link đến file news.hbs
+})
+
+app.get('/search', (req, res) => {
+    // console.log(req.query.q)
+    res.render('search'); // link đến file search.hbs
 })
 
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
