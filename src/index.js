@@ -5,6 +5,9 @@ const handlebars = require('express-handlebars');
 const app = express();
 const port = 3000;
 
+const route = require('./routes/index'); //gọi đến file index
+
+
 // static files
 app.use(express.static(path.join(__dirname,'public')));//trỏ đến folder public
 
@@ -28,26 +31,9 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources/views'));
 
 
-// Router
-app.get('/', (req, res) => { //req: request, res: response
-    res.render('home'); // link đến file home.hbs
-})
+// Router init
+route(app)
 
-app.get('/news', (req, res) => {
-    res.render('news'); // link đến file news.hbs
-})
-
-app.get('/search', (req, res) => {
-    // console.log(req.query.q)
-    res.render('search'); // link đến file search.hbs
-})
-
-app.post('/search', (req, res) => {
-    // console.log(req.query.q): Query parameters thì là .query
-    console.log(req.body);// Form default thì là .body
-    // res.send('search');
-    res.send(''); // link đến file search.hbs
-})
 
 // Connect với port và hiển thị đường dẫn dự án
 app.listen(port, () => console.log(`Example app listening at http://localhost:${port}`));
