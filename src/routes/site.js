@@ -5,7 +5,7 @@ const router = express.Router();
 const sidesController = require('../app/controllers/SidesController');
 
 // sidesController.index
-router.use('/search', sidesController.search)
-router.use('/', sidesController.home) // gọi đến function index
+router.use('/search', sidesController.search);
+router.use('/', sidesController.home); // gọi đến function index
 
 module.exports = router;

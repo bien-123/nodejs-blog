@@ -1,14 +1,13 @@
 class SidesController {
-
     // [GET] /
-    home (req, res) {
+    home(req, res) {
         res.render('home');
     }
 
     // [GET] /search
     search(req, res) {
-        res.render("search")
+        res.render('search');
     }
 }
 
-module.exports = new SidesController
+module.exports = new SidesController();
