@@ -1,8 +1,10 @@
 const newsRouter = require('./news'); // lấy dữ liệu từ file news.js
 const sitesRouter = require('./site'); // lấy dữ liệu từ file news.js
+const coursesRouter = require('./courses');
 
 function route(app) {
     app.use('/news', newsRouter);
+    app.use('/courses', coursesRouter);
 
     app.use('/', sitesRouter);
 
