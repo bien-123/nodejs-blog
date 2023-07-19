@@ -1,11 +1,11 @@
+<a class="btn btn-primary" href="/courses/create" role="button">Đăng ký khóa học</a>
 <div class="mt-4">
     <div class="row">
-
         {{#each courses}}
             <div class="col-sm-6 col-lg-4">
                 <div class="card card-course-item">
                     <a href="/courses/{{this.slug}}">
-                        <img class="card-img-top" src="{{this.image}}" alt="{{this.name}}"></img>
+                        <img width="315" height="200" class="card-img-top" src="{{this.image}}" alt="{{this.name}}"></img>
                     </a>
                     <div class="card-body">
                         <a href="/courses/{{this.slug}}">
