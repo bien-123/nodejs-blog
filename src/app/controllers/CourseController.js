@@ -4,6 +4,7 @@ const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoo
 class CourseController {
     // Methods : get, POST, PUT, PATCH, DELETE, OPTIONS, HEAD
 
+    //DETAIL COURSES
     // [GET] /courses/:slug
     show(req, res, next) {
         Course.findOne({ slug: req.params.slug })
@@ -13,6 +14,8 @@ class CourseController {
             .catch(next);
     }
 
+
+    // CREATE COURSES
     // [GET] /course/create : tạo ra UI cho form tạo mới
     create(req, res, next) {
         res.render('courses/create');
@@ -31,6 +34,8 @@ class CourseController {
             .catch((error) => {});
     }
 
+
+    // UPDATE COURSES
     // [GET] /course/:id/edit
     edit(req, res, next) {
         Course.findById(req.params.id)
@@ -41,11 +46,19 @@ class CourseController {
             )
             .catch(next);
     }
-
     // [PUT] /course/:id
     update(req, res, next) {
         Course.updateOne({ _id: req.params.id }, req.body)
             .then(() => res.redirect('/me/stored/courses'))
+            .catch(next);
+    }
+
+
+    // DELETE COURSE
+    // [DELETE] /course/:id
+    delete(req, res, next) {
+        Course.deleteOne({ _id: req.params.id })
+            .then(() => res.redirect('back'))
             .catch(next);
     }
 }
