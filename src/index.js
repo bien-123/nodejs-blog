@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const { engine } = require('express-handlebars');
 const app = express();
 const port = 3000;
+const methodOverride = require('method-override');
 
 const route = require('./routes/index'); //gọi đến file index
 const db = require('./config/db');
@@ -25,6 +26,8 @@ app.use(
 // xử lý dạng dữ liệu từ code js gửi lên
 app.use(express.json());
 
+app.use(methodOverride('_method'));
+
 // HTTP logger: hiển thị thông tin chương trình
 // app.use(morgan('combined'));
 
@@ -34,7 +37,7 @@ app.engine(
     engine({
         extname: '.hbs', //khi đặt tên đuôi chỉ cần để là hbs thay vì handlebars
         helpers: {
-            sum: (a, b) => a + b,
+            sum: (a, b) => a + b, //hiển thị id +1
         },
     }),
 );
