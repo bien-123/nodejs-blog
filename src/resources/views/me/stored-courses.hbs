@@ -1,7 +1,10 @@
 <div class='mt-4'>
     <div>
         <h3>Khóa học của tôi</h3>
-        <a href="/me/trash/courses">Thùng rác</a>
+        {{!-- {{#if deleteCount }} : Nếu ko có thư mục đã xóa thì ẩn thùng rác --}}
+            {{!-- <a href='/me/trash/courses'>Thùng rác: {{deleteCount}}</a> --}}
+        {{!-- {{/if}} --}}
+        <a href='/me/trash/courses'>Thùng rác</a>
     </div>
     <table class='table mt-4'>
         <thead>
@@ -30,11 +33,11 @@
                         >Xóa</a>
                     </td>
                 </tr>
-                {{else}}
+            {{else}}
                 <tr>
-                    <td colspan="5" class="text-center">
+                    <td colspan='5' class='text-center'>
                         Bạn chưa đăng khóa học nào!
-                        <a href="/courses/create">Đăng khóa học</a>
+                        <a href='/courses/create'>Đăng khóa học</a>
                     </td>
                 </tr>
             {{/each}}
@@ -77,17 +80,13 @@
     document.addEventListener('DOMContentLoaded', function(){ 
         var courseId; 
         var deleteForm = document.forms['delete-course-form']; 
-        var btnDeleteCourse = document.getElementById('btn-delete-course');
-
-        // When dialog confirm clicked
+        var btnDeleteCourse = document.getElementById('btn-delete-course'); 
+        // When dialog confirm clicked 
         $('#delete-course-modal').on('show.bs.modal', function(event) { 
             var button = $(event.relatedTarget); 
-            courseId = button.data('id') ; 
-        }) ; 
-
-        // When delete course btn clicked
-        btnDeleteCourse.onclick = function() { 
-            deleteForm.action = '/courses/' + courseId + '?_method=DELETE'; 
+            courseId = button.data('id') ; }) ; 
+            // When delete course btn clicked
+            btnDeleteCourse.onclick = function() { deleteForm.action = '/courses/' + courseId + '?_method=DELETE';
             deleteForm.submit(); 
             } 
         });

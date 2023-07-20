@@ -4,6 +4,21 @@ const { mutipleMongooseToObject, mongooseToObject } = require('../../util/mongoo
 class MeController {
     // [GET] /me/stored/courses
     storedCourses(req, res, next) {
+        // Promise.all([Course.find({}), Course.countDocumentsDeleted({deleted: true})])
+        //     .then(([courses, deleteCount]) =>
+        //         res.render('me/stored-courses', {
+        //             deleteCount,
+        //             courses: mutipleMongooseToObject(courses),
+        //         }),
+        //     )
+        //     .catch(next);
+
+        // Course.countDocumentsDeleted()
+        //     .then((deleteCount) => {
+        //         console.log(deleteCount);
+        //     })
+        //     .catch(() => {});
+
         Course.find({}) // { deletedAt: null }: lấy DL có fields deletedAt: null
             .then((courses) =>
                 res.render('me/stored-courses', {
@@ -11,7 +26,7 @@ class MeController {
                 }),
             )
             .catch(next);
-        // res.render('me/stored-courses');
+        //res.render('me/stored-courses');
     }
 
     // [GET] /me/trash/courses :Delete soft

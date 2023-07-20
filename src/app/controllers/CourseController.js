@@ -62,16 +62,16 @@ class CourseController {
     // [DELETE] /course/:id/force
     forceDestroy(req, res, next) {
         Course.deleteOne({ _id: req.params.id })
-        .then(() => res.redirect('back'))
-        .catch(next);
+            .then(() => res.redirect('back'))
+            .catch(next);
     }
 
     // DELETE SOFT
     // [PATCH] /course/:id/restore
     restore(req, res, next) {
         Course.restore({ _id: req.params.id })
-        .then(() => res.redirect('back'))
-        .catch(next);
+            .then(() => res.redirect('back'))
+            .catch(next);
     }
 }
 
