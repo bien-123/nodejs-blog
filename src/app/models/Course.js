@@ -5,7 +5,7 @@ const mongooseDelete = require('mongoose-delete');
 const Schema = mongoose.Schema;
 
 // Schema: phải có field trong column ở table thì mới thêm đc
-const Course = new Schema(
+const CourseSchema = new Schema(
     {
         name: { type: String, require: true },
         description: { type: String, maxLength: 600 },
@@ -21,11 +21,22 @@ const Course = new Schema(
     },
 );
 
+// Custom query helpers
+CourseSchema.query.sortable = function (req) {
+    if (req.query.hasOwnProperty('_sort')) {
+        const isValidType = ['asc', 'desc'].includes(req.query.type);
+        return this.sort({
+            [req.query.column]: isValidType ? req.query.type : 'desc',
+        });
+    }
+    return this;
+};
+
 // Add plugins
 mongoose.plugin(slug);
-Course.plugin(mongooseDelete, {
+CourseSchema.plugin(mongooseDelete, {
     deletedAt: true, // thêm khoảng thời gian xóa vào fields deletedAt
     overrideMethods: 'all',
 });
 
-module.exports = mongoose.model('Course', Course);
+module.exports = mongoose.model('Course', CourseSchema);
