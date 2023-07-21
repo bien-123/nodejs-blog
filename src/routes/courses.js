@@ -5,18 +5,24 @@ const router = express.Router();
 const courseController = require('../app/controllers/CourseController');
 
 // courseController.index
+// Create a new Course
 router.get('/create', courseController.create);
 router.post('/store', courseController.store);
 
+router.post('/handle-form-actions', courseController.handleFormActions);
+
+// Update a Course
 router.get('/:id/edit', courseController.edit);
 router.put('/:id', courseController.update);
 
+// Delete a Course
 router.delete('/:id', courseController.destroy);
 
 // DELETE SOFT
 router.patch('/:id/restore', courseController.restore);
 router.delete('/:id/force', courseController.forceDestroy);
 
+// Show course
 router.get('/:slug', courseController.show);
 
 module.exports = router;
