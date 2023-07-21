@@ -19,13 +19,31 @@ class MeController {
         //     })
         //     .catch(() => {});
 
-        Course.find({}) // { deletedAt: null }: lấy DL có fields deletedAt: null
-            .then((courses) =>
+        // SORT Course
+        let courseQuery = Course.find({});
+        if(req.query.hasOwnProperty('_sort')) {
+            courseQuery = courseQuery.sort({
+                [req.query.column]: req.query.type
+            });
+        }
+
+        Promise.all([courseQuery, Course.countDocumentsDeleted()])
+            .then(([courses, deleteCount]) =>
                 res.render('me/stored-courses', {
+                    deleteCount,
                     courses: mutipleMongooseToObject(courses),
                 }),
             )
             .catch(next);
+
+        // GET list khóa học
+        // Course.find({}) // { deletedAt: null }: lấy DL có fields deletedAt: null
+        //     .then((courses) =>
+        //         res.render('me/stored-courses', {
+        //             courses: mutipleMongooseToObject(courses),
+        //         }),
+        //     )
+        //     .catch(next);
         //res.render('me/stored-courses');
     }
 
