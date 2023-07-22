@@ -24,14 +24,13 @@ class CourseController {
     // [POST] /course/store : thêm dữ liệu từ form tạo mới lên DB
     store(req, res, next) {
         // res.json(req.body.name);//dùng để login
-
         const formData = req.body;
         formData.image = `https://img.youtube.com/vi/${req.body.video}/sddefault.jpg`;
         const course = new Course(formData);
         course
             .save()
             .then(() => res.redirect('/me/stored/courses')) //thêm xong sẽ chuyển hướng về trang
-            .catch((error) => {});
+            .catch(next);
     }
 
     // UPDATE COURSES
@@ -77,14 +76,14 @@ class CourseController {
 
     // [POST] /courses/handle-form-actions
     handleFormActions(req, res, next) {
-        switch(req.body.action) {
+        switch (req.body.action) {
             case 'delete':
-                Course.delete({ _id: {$in: req.body.courseIds} })
+                Course.delete({ _id: { $in: req.body.courseIds } })
                     .then(() => res.redirect('back'))
                     .catch(next);
                 break;
             default:
-                res.json({message: 'Action is invalid'});
+                res.json({ message: 'Action is invalid' });
         }
     }
 }

@@ -1,12 +1,15 @@
 const mongoose = require('mongoose');
 const slug = require('mongoose-slug-generator');
 const mongooseDelete = require('mongoose-delete');
+const AutoIncrement = require('mongoose-sequence')(mongoose);
+const autoIncrement = require('mongoose-auto-increment');
 
 const Schema = mongoose.Schema;
 
 // Schema: phải có field trong column ở table thì mới thêm đc
 const CourseSchema = new Schema(
     {
+        _id: { type: Number },
         name: { type: String, require: true },
         description: { type: String, maxLength: 600 },
         image: { type: String, maxLength: 255 },
@@ -17,6 +20,7 @@ const CourseSchema = new Schema(
         // updatedAt: { type: Date, default: Date.now },
     },
     {
+        _id: false,
         timestamps: true,
     },
 );
@@ -34,6 +38,8 @@ CourseSchema.query.sortable = function (req) {
 
 // Add plugins
 mongoose.plugin(slug);
+CourseSchema.plugin(AutoIncrement, 'Course');
+// CourseSchema.plugin(autoIncrement.plugin, 'Course');
 CourseSchema.plugin(mongooseDelete, {
     deletedAt: true, // thêm khoảng thời gian xóa vào fields deletedAt
     overrideMethods: 'all',
