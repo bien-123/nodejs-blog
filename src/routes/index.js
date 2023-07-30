@@ -3,12 +3,14 @@ const newsRouter = require('./news'); // lấy dữ liệu từ file news.js
 const sitesRouter = require('./site'); // lấy dữ liệu từ file news.js
 const coursesRouter = require('./courses');
 const meRouter = require('./me');
+const userRouter = require('./user');
 
 function route(app) {
     app.use('/news', newsRouter);
     app.use('/courses', coursesRouter);
     app.use('/me', meRouter);
-    app.use('/', sitesRouter);
+    app.use('/sites', sitesRouter);
+    app.use('/', userRouter);
 
     // app.get('/search', (req, res) => {
     //     // console.log(req.query.q)

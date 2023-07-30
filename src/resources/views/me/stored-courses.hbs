@@ -1,10 +1,12 @@
+{{> header}}
 <form name="container-from" class='mt-4' method="POST" action="/courses/handle-form-actions">
     <div>
         <h3>Khóa học của tôi</h3>
-        {{!-- {{#if deleteCount }} : Nếu ko có thư mục đã xóa thì ẩn thùng rác --}}
-        {{!-- <a href='/me/trash/courses'>Thùng rác: {{deleteCount}}</a> --}}
-        {{!-- {{/if}} --}}
-        <a href='/me/trash/courses'>Thùng rác</a>
+        {{!-- : Nếu ko có thư mục đã xóa thì ẩn thùng rác --}}
+        {{#if deleteCount }} 
+            <a href='/me/trash/courses'>Thùng rác: {{deleteCount}}</a>
+        {{/if}}
+        {{!-- <a href='/me/trash/courses'>Thùng rác</a> --}}
     </div>
 
     <div class='mt-4 d-flex align-items-center'>
@@ -23,6 +25,15 @@
         <button class='btn btn-primary btn-sm check-all-submit-btn' disabled>Thực hiện</button>
 
     </div>
+
+    {{!-- <div>
+        <nav class="navbar navbar-light bg-light">
+            <form class="form-inline search">
+                <input class="form-control" id="input-name" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit" id="btn-search-course">Search</button>
+            </form>
+        </nav>
+    </div> --}}
 
     <table class='table mt-4'>
         <thead>
@@ -107,6 +118,7 @@
 
 {{! Delete hidden form }}
 <form name='delete-course-form' method='POST'></form>
+<form name="search-course-form" method='POST'></form>
 
 <script>
     document.addEventListener('DOMContentLoaded', function(){ 
@@ -118,6 +130,12 @@
         var checkboxAll = $('#checkbox-all'); // select id
         var courseItemCheckbox = $('input[name="courseIds[]"]'); // select input
         var checkAllSubmitBtn = $('.check-all-submit-btn'); // select class
+
+        var inputName = document.getElementById('input-name');
+        var btnSearchCourse = document.getElementById('btn-search-course');
+        console.log(inputName);
+
+        
 
         // When dialog confirm clicked 
         $('#delete-course-modal').on('show.bs.modal', function(event) { 
@@ -159,5 +177,7 @@
                     checkAllSubmitBtn.attr('disabled', true);
                 }
             }
+
+
         });
 </script>

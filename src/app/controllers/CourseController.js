@@ -86,6 +86,15 @@ class CourseController {
                 res.json({ message: 'Action is invalid' });
         }
     }
+
+    // [GET] /courses/search/:name
+    search(req, res, next) {
+        Course.find({ name: req.params.name })
+            .then((course) => {
+                res.render('courses/search', { course: mutipleMongooseToObject(course) });
+            })
+            .catch(next);
+    }
 }
 
 module.exports = new CourseController();

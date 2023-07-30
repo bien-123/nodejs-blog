@@ -6,6 +6,8 @@ const { engine } = require('express-handlebars');
 const app = express();
 const port = 3000;
 const methodOverride = require('method-override');
+const cookieParser = require('cookie-parser');
+const sessions = require('express-session');
 
 const SortMiddleware = require('./app/middlewares/sortMiddleware');
 
@@ -14,6 +16,22 @@ const db = require('./config/db');
 
 // Connect to DB
 db.connect();
+
+// creating 24 hours from milliseconds
+const oneDay = 1000 * 60 * 60 * 24;
+
+//session middleware
+app.use(
+    sessions({
+        secret: 'thisismysecrctekeyfhrgfgrfrty84fwir767',
+        saveUninitialized: true,
+        cookie: { maxAge: oneDay },
+        resave: false,
+    }),
+);
+
+// cookie parser middleware
+app.use(cookieParser());
 
 // static files
 app.use(express.static(path.join(__dirname, 'public'))); //trỏ đến folder public

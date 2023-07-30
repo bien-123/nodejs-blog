@@ -1,0 +1,27 @@
+<html lang='en'>
+    <head>
+        <meta charset='UTF-8' />
+        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1 style='text-align: center;'> LOGIN FORM </h1>
+        <div class='mt-4'>
+            <form method='POST' action='/store'>
+                <div class='form-group'>
+                    <label for=''>Username</label>
+                    <input type='text' name='username' class='form-control' placeholder='Nhập từ khóa username' />
+                </div>
+
+                <div class='form-group'>
+                    <label for=''>Password</label>
+                    <input type='password' name='password' class='form-control' placeholder='Nhập từ khóa password' />
+                </div>
+                <div class='form-group' style='display: flex; justify-content: center'>
+                    <button class='btn btn-primary' style='margin: 0 10px; width:100px'>LOGIN</button>
+                    <a href='/signup' class='btn btn-primary' style='margin: 0 10px; width:100px right:0'>SIGN UP</a>
+                </div>
+            </form>
+        </div>
+    </body>
+</html>

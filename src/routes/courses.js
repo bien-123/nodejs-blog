@@ -25,4 +25,7 @@ router.delete('/:id/force', courseController.forceDestroy);
 // Show course
 router.get('/:slug', courseController.show);
 
+// Search
+router.get('/search/:name', courseController.search)
+
 module.exports = router;
