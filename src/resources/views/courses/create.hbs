@@ -1,4 +1,5 @@
 {{> header}}
+{{!-- <script src="/ckeditor/ckeditor.js"></script> --}}
 <div class='mt-4'>
     <h3>ĐĂNG KÝ KHÓA HỌC</h3>
     <form method='POST' action='/courses/store'>
@@ -21,3 +22,7 @@
         <button type='submit' class='btn btn-primary'>Thêm khóa học</button>
     </form>
 </div>
+
+<script>
+        CKEDITOR.replace('description');//gọi đến mô tả chi tiết có id là content
+</script>
